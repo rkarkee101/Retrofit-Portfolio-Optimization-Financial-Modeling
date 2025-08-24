@@ -191,12 +191,7 @@ measures = [
 
 ---
 
-## 📝 License
-
-MIT (or your preferred license).
-
----
 
 ## 🙌 Acknowledgments
 
-Developed for building retrofit decision support and classroom demonstrations of capital budgeting under uncertainty.
+Developed for building retrofit decision support and classroom demonstrations of capital budgeting under uncertainty. Check for more upgrades...
