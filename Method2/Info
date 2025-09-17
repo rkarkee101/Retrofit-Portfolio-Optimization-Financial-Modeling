@@ -1,0 +1,23 @@
+# Method 2:
+
+
+Overview of the Optimization Approach
+The Python tool implements a multi-criteria decision analysis (MCDA) approach combined with combinatorial optimization to select the best portfolio of energy retrofit projects under a fixed budget constraint. Let me break down the methodology:
+
+# 1. Combinatorial Optimization with Exhaustive Search
+```# Generate all possible combinations of projects
+for r in range(1, len(project_names) + 1):
+    for combo in combinations(project_names, r):
+        total_cost = sum(self.projects[p]['cost'] for p in combo)
+        
+        # Skip if over budget
+        if total_cost > self.budget:
+            continue
+        
+        # Calculate combined score for this combination
+        total_score = 0
+        for p in combo:
+            score = self.calculate_combined_score(
+                self.projects[p], financial_weight, carbon_weight
+            )
+            total_score += score'''
