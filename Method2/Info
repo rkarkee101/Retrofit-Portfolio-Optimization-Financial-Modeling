@@ -21,3 +21,129 @@ for r in range(1, len(project_names) + 1):
                 self.projects[p], financial_weight, carbon_weight
             )
             total_score += score'''
+
+Why This Approach?
+Completeness: Examines all possible project combinations to guarantee finding the optimal solution
+
+Transparency: Easy to understand and explain to stakeholders
+
+Appropriate for Problem Size: With 7 projects, there are 2⁷ = 128 possible combinations, which is computationally feasible
+
+Exact Solution: Unlike heuristic methods, this finds the true optimal solution
+
+Limitations:
+Would become computationally expensive with many more projects (combinatorial explosion)
+
+For larger problems, we might switch to dynamic programming or genetic algorithms
+
+2. Multi-Criteria Scoring System
+Financial Metrics:
+Net Present Value (NPV):
+```pv_factor = (1 - (1 + self.discount_rate) ** -lifetime) / self.discount_rate
+npv = net_annual_cash_flow * pv_factor - cost'''
+
+
+Why: Accounts for time value of money, the gold standard in capital budgeting
+
+Meaning: Represents the total value created by the project in today's dollars
+
+Internal Rate of Return (IRR):
+
+Simplified calculation for comparative purposes
+
+Why: Provides a percentage return metric that's easily comparable across projects
+
+Environmental Metrics:
+Carbon Savings:
+
+Total tons of CO₂ reduced over project lifetime
+
+Why: Directly measures environmental impact toward net-zero goals
+
+Carbon Value:
+```carbon_value = carbon_savings * self.carbon_price'''
+Why: Monetizes environmental benefits for easier comparison with financial metrics
+
+Combined Scoring:
+```combined_score = (financial_weight * financial_score + 
+                 carbon_weight * carbon_score)'''
+
+Why Weighted Scoring:
+
+Allows flexible prioritization based on organizational goals
+
+70/30 weighting reflects common practice where financial returns are primary but environmental goals are significant
+
+Easily adjustable for different stakeholder preferences
+
+
+3. Uncertainty Handling
+Method:
+# Savings range with certainty factor
+'savings_range': (5000, 7000),  # (min, max) annual savings
+'certainty_factor': 0.9  # How certain are the predictions (0-1)
+
+# Applied in calculations:
+annual_savings = (min_savings + max_savings) / 2  # Expected value
+annual_savings *= certainty  # Adjusted for certainty
+
+
+Why This Approach?
+Realism: Acknowledges that energy savings predictions have uncertainty
+
+Transparent: Clearly shows the range of possible outcomes
+
+Conservative: Applies a discount factor to reflect prediction uncertainty
+
+Flexible: Can run different scenarios (min, max, expected)
+
+4. Visualization Strategy
+Why Multiple Visualizations?
+Cost vs NPV Chart: Direct financial comparison
+
+IRR vs Carbon Scatter Plot: Shows trade-offs between financial and environmental goals
+
+Combined Score Chart: Highlights optimal projects
+
+Portfolio Pie Charts: Shows budget allocation
+
+Uncertainty Charts: Communicates risk and prediction confidence
+
+Design Choices:
+Color Coding: Selected projects highlighted in gold for immediate identification
+
+Bubble Sizes: Proportional to project cost for quick visual assessment
+
+Dual-Axis Charts: Compare different metrics on the same plot
+
+Annotation: Direct labeling of data points for clarity
+
+5. Alternative Methods Considered
+Why Not Use Linear Programming?
+While LP would be efficient for large problems, the current problem size doesn't require it
+
+The nonlinear nature of some interactions (certainty factors) makes LP less suitable
+
+The current approach is more transparent to non-technical stakeholders
+
+6. Strengths of This Approach
+Comprehensive: Considers both financial and environmental dimensions
+
+Transparent: All calculations are explicit and explainable
+
+Flexible: Weights can be adjusted based on organizational priorities
+
+Risk-Aware: Incorporates uncertainty in savings predictions
+
+Visual: Provides clear graphical representations for decision-makers
+
+7. Potential Enhancements
+For more complex scenarios, we could add:
+
+Monte Carlo simulation for better uncertainty quantification
+
+Real options analysis for projects with flexible timing
+
+Project interdependencies (some projects may have synergistic effects)
+
+Risk-adjusted discount rates for projects with different risk profiles
